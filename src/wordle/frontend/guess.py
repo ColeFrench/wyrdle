@@ -1,12 +1,39 @@
 """Logic for making guesses."""
 
 import string
-from typing import Dict, Tuple
+from typing import Dict, Set, Tuple
 
 from ..common import words
+from ..common.hints import Hints
 
 LetterScores = Dict[str, int]
 WordScores = Tuple[LetterScores, ...]
+
+def filter_guesses(hints: Hints) -> Set[str]:
+    """Get all possible guesses according to the given hints."""
+    filtered_guesses: Set[str] = set()
+    for word in words.possible_words | words.additional_allowed_guesses:
+        for index, letter in enumerate(word):
+            if letter in hints.absent:
+                # This letter is absent in the answer, so this is not a
+                # possible guess
+                break
+
+            if hints.inverse_correct.get(index, letter) != letter \
+                    or letter in hints.inverse_misplaced.get(index, set()):
+                # This letter is not at this index in the answer, so this is
+                # not a possible guess
+                break
+        else:
+            for letter in hints.misplaced:
+                if letter not in word:
+                    # This letter exists in the answer, so this is not a
+                    # possible guess
+                    break
+            else:
+                filtered_guesses.add(word)
+
+    return filtered_guesses
 
 def score_guesses() -> WordScores:
     """Score all possible guesses.
