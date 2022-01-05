@@ -5,7 +5,7 @@ LENGTH = 5
 
 # The possible answers to the game. These are actually in order, so read on if
 # you want to spoil the game...
-possible_words = {
+possible_words = (
     'cigar',
     'rebut',
     'sissy',
@@ -2321,4 +2321,4 @@ possible_words = {
     'artsy',
     'rural',
     'shave',
-}
+)
