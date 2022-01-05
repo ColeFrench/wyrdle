@@ -35,10 +35,10 @@ def filter_guesses(hints: Hints) -> Set[str]:
 
     return filtered_guesses
 
-def score_guesses() -> WordScores:
-    """Score all possible guesses.
+def score_strings() -> WordScores:
+    """Score all possible strings, regardless of whether they are permitted guesses.
 
-    Scores are computed for each character in a guess, independently of one
+    Scores are computed for each character in a string, independently of one
     another. They are returned sorted in nonascending order.
     """
     # Initialize scores to 0
