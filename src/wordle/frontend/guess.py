@@ -12,7 +12,7 @@ WordScores = List[LetterScores]
 def filter_guesses(hints: Hints) -> Set[str]:
     """Get all possible guesses according to the given hints."""
     filtered_guesses: Set[str] = set()
-    for word in words.possible_words | words.additional_allowed_guesses:
+    for word in words.possible_words:
         for index, letter in enumerate(word):
             if letter in hints.absent \
                     and word.count(letter) != len(hints.correct.get(letter, set())) \

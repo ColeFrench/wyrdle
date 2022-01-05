@@ -25,9 +25,6 @@ def main():
 
         if round != 0:
             guess_pool &= guess.filter_guesses(hint) - {guess_}
-        if round == ROUNDS - 1:
-            # For the final guess, only guess possible answers
-            guess_pool -= words.additional_allowed_guesses
 
         sorted_guesses = guess.sort_guesses(guess_pool, guess.score_strings())
         if sorted_guesses:
