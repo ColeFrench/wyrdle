@@ -1,13 +1,13 @@
 """Logic for making guesses."""
 
 import string
-from typing import Dict, Set, Tuple
+from typing import Dict, List, Set
 
 from ..common import words
 from ..common.hints import Hints
 
 LetterScores = Dict[str, int]
-WordScores = Tuple[LetterScores, ...]
+WordScores = List[LetterScores]
 
 def filter_guesses(hints: Hints) -> Set[str]:
     """Get all possible guesses according to the given hints."""
@@ -42,7 +42,7 @@ def score_strings() -> WordScores:
     character in a string, independently of one another.
     """
     # Initialize scores to 0
-    scores = tuple(dict.fromkeys(string.ascii_lowercase, 0) for _ in range(words.LENGTH))
+    scores = list(dict.fromkeys(string.ascii_lowercase, 0) for _ in range(words.LENGTH))
 
     for word in words.possible_words:
         for i in range(words.LENGTH):
@@ -59,7 +59,7 @@ def score_strings() -> WordScores:
 
     return scores
 
-def sort_guesses(guesses: Set[str], scores: WordScores) -> Tuple[str]:
+def sort_guesses(guesses: Set[str], scores: WordScores) -> List[str]:
     """Sort the given guesses according to the given scores.
 
     They are returned in nonascending order.
@@ -69,4 +69,4 @@ def sort_guesses(guesses: Set[str], scores: WordScores) -> Tuple[str]:
         scored_guesses[guess] = sum(scores[i][guess[i]] for i in range(words.LENGTH))
 
     sorted_scored_guesses = sorted(scored_guesses.items(), key=lambda item: item[1], reverse=True)
-    return tuple(guess for guess, _ in sorted_scored_guesses)
+    return [guess for guess, _ in sorted_scored_guesses]
