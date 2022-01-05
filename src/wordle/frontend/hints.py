@@ -11,7 +11,7 @@ def _merge_misplaced(current: Hints.Misplaced, new: Hints.Misplaced):
         current.setdefault(letter, set()).update(indices)
 
 def _merge_absent(current: Hints.Absent, new: Hints.Absent):
-    current.update(new)
+    current |= new
 
 def merge(current: Hints, new: Hints):
     """Merge newly received hints with the current ones."""
