@@ -38,8 +38,8 @@ def filter_guesses(hints: Hints) -> Set[str]:
 def score_strings() -> WordScores:
     """Score all possible strings, regardless of whether they are permitted guesses.
 
-    Scores are computed for each character in a string, independently of one
-    another. They are returned sorted in nonascending order.
+    Scores are returned in an arbitrary order. They are computed for each
+    character in a string, independently of one another.
     """
     # Initialize scores to 0
     scores = tuple(dict.fromkeys(string.ascii_lowercase, 0) for _ in range(words.LENGTH))
@@ -57,9 +57,7 @@ def score_strings() -> WordScores:
             # considered.
             scores[i][word[i]] = abs((len(words.possible_words) // 2) - scores[i][word[i]])
 
-    # Sort scores in nonascending order
-    sorted_scores = tuple(dict(sorted(letter_scores.items(), key=lambda item: item[1], reverse=True)) for letter_scores in scores)
-    return sorted_scores
+    return scores
 
 def sort_guesses(guesses: Set[str], scores: WordScores) -> Tuple[str]:
     """Sort the given guesses according to the given scores.
