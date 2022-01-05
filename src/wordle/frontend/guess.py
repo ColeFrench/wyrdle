@@ -60,3 +60,15 @@ def score_strings() -> WordScores:
     # Sort scores in nonascending order
     sorted_scores = tuple(dict(sorted(letter_scores.items(), key=lambda item: item[1], reverse=True)) for letter_scores in scores)
     return sorted_scores
+
+def sort_guesses(guesses: Set[str], scores: WordScores) -> Tuple[str]:
+    """Sort the given guesses according to the given scores.
+
+    They are returned in nonascending order.
+    """
+    scored_guesses = {}
+    for guess in guesses:
+        scored_guesses[guess] = sum(scores[i][guess[i]] for i in range(words.LENGTH))
+
+    sorted_scored_guesses = sorted(scored_guesses.items(), key=lambda item: item[1], reverse=True)
+    return tuple(guess for guess, _ in sorted_scored_guesses)
