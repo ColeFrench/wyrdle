@@ -1,5 +1,8 @@
 """All the words used in the game."""
 
+# The length of all possible answers and guesses
+LENGTH = 5
+
 # The possible answers to the game. These are actually in order, so read on if
 # you want to spoil the game...
 possible_words = {
