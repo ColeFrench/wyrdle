@@ -15,8 +15,8 @@ def filter_guesses(hints: Hints) -> Set[str]:
     for word in words.possible_words | words.additional_allowed_guesses:
         for index, letter in enumerate(word):
             if letter in hints.absent \
-                    and word.count(letter) > len(hints.correct.get(letter, set())) \
-                                           + len(hints.misplaced.get(letter, set())):
+                    and word.count(letter) != len(hints.correct.get(letter, set())) \
+                                            + len(hints.misplaced.get(letter, set())):
                 # This letter is absent in the answer, so this is not a
                 # possible guess
                 break
