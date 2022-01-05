@@ -48,14 +48,14 @@ def score_strings() -> WordScores:
         for i in range(words.LENGTH):
             scores[i][word[i]] += 1
 
-    for word in words.possible_words:
-        for i in range(words.LENGTH):
+    for i in range(words.LENGTH):
+        for letter in string.ascii_lowercase:
             # Score each character by its frequency's closeness to 50%. This
             # means the best character is the one that eliminates closest to
             # half the possible words. Note that this is only true per
             # character, so there is correlation between characters that is not
             # considered.
-            scores[i][word[i]] = abs((len(words.possible_words) // 2) - scores[i][word[i]])
+            scores[i][letter] = -abs((len(words.possible_words) // 2) - scores[i][letter])
 
     return scores
 
