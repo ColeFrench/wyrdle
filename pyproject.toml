@@ -21,6 +21,8 @@ packages = [
 python = "^3.8"
 
 [tool.poetry.dev-dependencies]
+pydocstyle = "^6.1.1"
+pylint = "^2.12.2"
 pytest = "^6.2.5"
 
 [build-system]
