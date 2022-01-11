@@ -1,4 +1,4 @@
-# Wordle
+# Wyrdle
 ![Funny badge](https://forthebadge.com/images/badges/60-percent-of-the-time-works-every-time.svg)
 
 This is a Python implementation of the viral word game, [Wordle](https://www.powerlanguage.co.uk/wordle/), by [Josh Wardle](https://www.powerlanguage.co.uk/) (ohh, so that's where the name is from).

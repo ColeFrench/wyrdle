@@ -5,9 +5,9 @@
 import random
 from typing import List
 
-from wordle.backend import hints as backend_hints
-from wordle.common import hints, words
-from wordle.frontend import guess
+from wyrdle.backend import hints as backend_hints
+from wyrdle.common import hints, words
+from wyrdle.frontend import guess
 
 ROUNDS = 6
 
