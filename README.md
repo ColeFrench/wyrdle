@@ -9,7 +9,7 @@ Additionally, I've coded a bot that tries to win the game with its own strategy!
 I still need to polish some features—especially the user experience, which currently doesn't exist—but the main functionality is complete. Simply clone the repo and run `src/main.py` to watch the bot run on a random word.
 
 ## Example
-For now, you can run the bot on any word by changing [this line](src/main.py#L31). For example, here is the run on `word = 'smile'`:
+For now, you can run the bot on any word by changing [this line](src/main.py#L30). For example, here is the run on `word = 'smile'`:
 > Wordle 666 2/6  
 >   
 > 🟩🟨⬛⬛🟩  
