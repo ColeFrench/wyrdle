@@ -3,7 +3,6 @@
 """Driver."""
 
 import random
-from typing import List
 
 from wyrdle.backend import hints as backend_hints
 from wyrdle.common import hints, words
@@ -11,7 +10,7 @@ from wyrdle.frontend import guess
 
 ROUNDS = 6
 
-def generate_report(word: str, rounds: int, guesses: List[str], hints_: List[hints.Hints]):
+def generate_report(word: str, rounds: int, guesses: list[str], hints_: list[hints.Hints]):
     """Print the same report as Wordle."""
     print(f"Wordle {words.possible_words.index(word)} {rounds if guesses[-1] == word else 'X'}/{ROUNDS}\n")
     for round in range(rounds):

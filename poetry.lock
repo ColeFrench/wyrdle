@@ -219,8 +219,8 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 
 [metadata]
 lock-version = "1.1"
-python-versions = "^3.8"
-content-hash = "f1cc55f0ce1ee762539fa0b19e4374b630494d61f08b012989ec6535b8de4dbd"
+python-versions = "^3.9"
+content-hash = "2191467dd0797164cc417cd36e3d2a5094fd79e40cfcbd51d8514457f921a6b5"
 
 [metadata.files]
 astroid = [

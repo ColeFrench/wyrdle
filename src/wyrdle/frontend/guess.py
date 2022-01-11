@@ -1,17 +1,16 @@
 """Logic for making guesses."""
 
 import string
-from typing import Dict, List, Set
 
 from ..common import words
 from ..common.hints import Hints
 
-LetterScores = Dict[str, int]
-WordScores = List[LetterScores]
+LetterScores = dict[str, int]
+WordScores = list[LetterScores]
 
-def filter_guesses(hints: Hints) -> Set[str]:
+def filter_guesses(hints: Hints) -> set[str]:
     """Get all possible guesses according to the given hints."""
-    filtered_guesses: Set[str] = set()
+    filtered_guesses: set[str] = set()
     for word in words.possible_words:
         for index, letter in enumerate(word):
             if letter in hints.absent \
@@ -63,7 +62,7 @@ def score_strings() -> WordScores:
 
     return scores
 
-def sort_guesses(guesses: Set[str], scores: WordScores) -> List[str]:
+def sort_guesses(guesses: set[str], scores: WordScores) -> list[str]:
     """Sort the given guesses according to the given scores.
 
     They are returned in nonascending order.
