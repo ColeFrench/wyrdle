@@ -1,23 +1,16 @@
 """A module for handling the information the player receives each round."""
 
-from typing import Dict, NamedTuple, Set
+from dataclasses import dataclass, field
+from typing import Dict, Set
 
-class Hints(NamedTuple):
+@dataclass
+class Hints:
     """A summary of the information the player receives each round."""
 
-    Correct = Dict[str, Set[int]]
-    InverseCorrect = Dict[int, str]
+    correct: Dict[str, Set[int]] = field(default_factory=dict)
+    inverse_correct: Dict[int, str] = field(default_factory=dict)
 
-    Misplaced = Dict[str, Set[int]]
-    InverseMisplaced = Dict[int, Set[str]]
+    misplaced: Dict[str, Set[int]] = field(default_factory=dict)
+    inverse_misplaced: Dict[int, Set[str]] = field(default_factory=dict)
 
-    Absent = Set[str]
-
-
-    correct: Correct = {}
-    inverse_correct: InverseCorrect = {}
-
-    misplaced: Misplaced = {}
-    inverse_misplaced: InverseMisplaced = {}
-
-    absent: Absent = set()
+    absent: Set[str] = field(default_factory=set)
