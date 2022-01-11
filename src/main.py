@@ -32,9 +32,7 @@ def main():
     print(f"Chose target word: {word}")
 
     guesses = []
-    hints_ = [hints.Hints(correct={}, inverse_correct={},
-                          misplaced={}, inverse_misplaced={},
-                          absent=set())]
+    hints_ = [hints.Hints()]
     guess_pool = guess.filter_guesses(hints_[0])
 
     for round in range(ROUNDS):

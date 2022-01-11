@@ -14,10 +14,10 @@ class Hints(NamedTuple):
     Absent = Set[str]
 
 
-    correct: Correct
-    inverse_correct: InverseCorrect
+    correct: Correct = {}
+    inverse_correct: InverseCorrect = {}
 
-    misplaced: Misplaced
-    inverse_misplaced: InverseMisplaced
+    misplaced: Misplaced = {}
+    inverse_misplaced: InverseMisplaced = {}
 
-    absent: Absent
+    absent: Absent = set()

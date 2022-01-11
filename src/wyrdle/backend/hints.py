@@ -4,9 +4,7 @@ from ..common.hints import Hints
 
 def hint(answer: str, guess: str) -> Hints:
     """Hint at the answer based on a guess."""
-    hint = Hints(correct={}, inverse_correct={},
-                 misplaced={}, inverse_misplaced={},
-                 absent=set())
+    hint = Hints()
     working_answer = answer[:]
 
     # First, scan for correct letters
