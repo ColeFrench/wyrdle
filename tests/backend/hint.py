@@ -13,9 +13,8 @@ def make_hint(correct: str=_DEFAULT_ARGUMENT,
 
     Each argument is a guess with nonmatching letters replaced by asterisks.
 
-    For example, if 'puppy' is the answer and 'poppy' is the guess, then the
-    letter 'o' doesn't match the 'correct' condition. Therefore, pass
-    `correct='p*ppy'`.
+    For example, if 'puppy' is the answer and 'poppy' is the guess, then pass
+    `correct='p*ppy'` and `absent='*o***'`.
     """
     constructed_correct = {}
     for index, character in enumerate(correct):
