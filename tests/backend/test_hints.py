@@ -32,6 +32,13 @@ _tests = {
             absent=set('ky')
         )),
     ),
+    'all': (
+        ('smile', 'grins', hints.Hints(
+            correct={'i': {2}},
+            misplaced={'s': {4}},
+            absent=set('grn')
+        )),
+    ),
 }
 
 @pytest.mark.parametrize(
