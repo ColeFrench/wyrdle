@@ -1,30 +1,26 @@
 """Test the hints module."""
 
+import pytest
+
 from wyrdle.backend import hints
 
 _tests = {
-    # unique letters
-    'smile': {
-        # all absent letters
-        'frown': hints.Hints(
-            absent=set('frown'),
-        ),
-        # all misplaced letters
-        'limes': hints.Hints(
-            misplaced={v: {k} for k, v in enumerate('limes')},
-        ),
-        # all correct letters
-        'smile': hints.Hints(
-            correct={v: {k} for k, v in enumerate('smile')},
-        ),
-    },
+    'all letters absent': (
+        ('smile', 'frown', hints.Hints(absent=set('frown'))),
+    ),
+    'all letters misplaced': (
+        ('smile', 'limes', hints.Hints(misplaced={v: {k} for k, v in enumerate('limes')})),
+    ),
+    'all letters correct': (
+        ('smile', 'smile', hints.Hints(correct={v: {k} for k, v in enumerate('smile')})),
+    ),
 }
 
-def _test_hints(answer: str):
-    """Test that the backend provides correct hints for the given answer."""
-    for guess, expected_hint in _tests[answer].items():
-        assert expected_hint == hints.hint(answer, guess)
-
-def test_unique():
-    """Test that the backend provides correct hints when all letters in the answer are unique."""
-    _test_hints('smile')
+@pytest.mark.parametrize(
+    argnames=('answer', 'guess', 'expected'),
+    argvalues=(test for test_group in _tests.values() for test in test_group),
+    ids=(f"{id_}: {answer}; {guess}?" for id_, test_group in _tests.items() for answer, guess, _ in test_group),
+)
+def test_hints(answer: str, guess: str, expected: hints.Hints):
+    """Test that the backend provides the expected hints."""
+    assert expected == hints.hint(answer, guess)
