@@ -4,40 +4,29 @@ import pytest
 
 from wyrdle.backend import hint
 
+from .hint import make_hint
+
 _tests = {
     'all correct': (
-        ('smile', 'smile', hint.Hint(correct={v: {k} for k, v in enumerate('smile')})),
+        ('smile', 'smile', make_hint(correct='smile')),
     ),
     'all misplaced': (
-        ('smile', 'limes', hint.Hint(misplaced={v: {k} for k, v in enumerate('limes')})),
+        ('smile', 'limes', make_hint(misplaced='limes')),
     ),
     'all absent': (
-        ('smile', 'frown', hint.Hint(absent=set('frown'))),
+        ('smile', 'frown', make_hint(absent='frown')),
     ),
     'correct & misplaced': (
-        ('smile', 'slime', hint.Hint(
-            correct={'s': {0}, 'i': {2}, 'e': {4}},
-            misplaced={'l': {1}, 'm': {3}}
-        )),
+        ('smile', 'slime', make_hint(correct='s*i*e', misplaced='*l*m*')),
     ),
     'correct & absent': (
-        ('smile', 'guile', hint.Hint(
-            correct={'i': {2}, 'l': {3}, 'e': {4}},
-            absent=set('gu')
-        )),
+        ('smile', 'guile', make_hint(correct='**ile', absent='gu***')),
     ),
     'misplaced & absent': (
-        ('smile', 'milky', hint.Hint(
-            misplaced={'m': {0}, 'i': {1}, 'l': {2}},
-            absent=set('ky')
-        )),
+        ('smile', 'milky', make_hint(misplaced='mil**', absent='***ky')),
     ),
     'all': (
-        ('smile', 'grins', hint.Hint(
-            correct={'i': {2}},
-            misplaced={'s': {4}},
-            absent=set('grn')
-        )),
+        ('smile', 'grins', make_hint(correct='**i**', misplaced='****s', absent='gr*n*')),
     ),
 }
 
