@@ -1,39 +1,39 @@
-"""Test the hints module."""
+"""Test the hint module."""
 
 import pytest
 
-from wyrdle.backend import hints
+from wyrdle.backend import hint
 
 _tests = {
     'all correct': (
-        ('smile', 'smile', hints.Hints(correct={v: {k} for k, v in enumerate('smile')})),
+        ('smile', 'smile', hint.Hint(correct={v: {k} for k, v in enumerate('smile')})),
     ),
     'all misplaced': (
-        ('smile', 'limes', hints.Hints(misplaced={v: {k} for k, v in enumerate('limes')})),
+        ('smile', 'limes', hint.Hint(misplaced={v: {k} for k, v in enumerate('limes')})),
     ),
     'all absent': (
-        ('smile', 'frown', hints.Hints(absent=set('frown'))),
+        ('smile', 'frown', hint.Hint(absent=set('frown'))),
     ),
     'correct & misplaced': (
-        ('smile', 'slime', hints.Hints(
+        ('smile', 'slime', hint.Hint(
             correct={'s': {0}, 'i': {2}, 'e': {4}},
             misplaced={'l': {1}, 'm': {3}}
         )),
     ),
     'correct & absent': (
-        ('smile', 'guile', hints.Hints(
+        ('smile', 'guile', hint.Hint(
             correct={'i': {2}, 'l': {3}, 'e': {4}},
             absent=set('gu')
         )),
     ),
     'misplaced & absent': (
-        ('smile', 'milky', hints.Hints(
+        ('smile', 'milky', hint.Hint(
             misplaced={'m': {0}, 'i': {1}, 'l': {2}},
             absent=set('ky')
         )),
     ),
     'all': (
-        ('smile', 'grins', hints.Hints(
+        ('smile', 'grins', hint.Hint(
             correct={'i': {2}},
             misplaced={'s': {4}},
             absent=set('grn')
@@ -46,6 +46,6 @@ _tests = {
     argvalues=(test for test_group in _tests.values() for test in test_group),
     ids=(f"{id_}: {answer}; {guess}?" for id_, test_group in _tests.items() for answer, guess, _ in test_group),
 )
-def test_hints(answer: str, guess: str, expected: hints.Hints):
+def test_hints(answer: str, guess: str, expected: hint.Hint):
     """Test that the backend provides the expected hints."""
-    assert expected == hints.hint(answer, guess)
+    assert expected == hint.hint(answer, guess)

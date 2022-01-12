@@ -3,7 +3,7 @@
 from dataclasses import dataclass, field
 
 @dataclass
-class Hints:
+class Hint:
     """A summary of the information the player receives each round."""
 
     correct: dict[str, set[int]] = field(default_factory=dict)

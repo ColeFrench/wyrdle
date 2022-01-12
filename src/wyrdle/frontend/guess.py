@@ -3,30 +3,30 @@
 import string
 
 from ..common import words
-from ..common.hints import Hints
+from ..common.hint import Hint
 
 LetterScores = dict[str, int]
 WordScores = list[LetterScores]
 
-def filter_guesses(hints: Hints) -> set[str]:
-    """Get all possible guesses according to the given hints."""
+def filter_guesses(hint: Hint) -> set[str]:
+    """Get all possible guesses according to the given hint."""
     filtered_guesses: set[str] = set()
     for word in words.possible_words:
         for index, letter in enumerate(word):
-            if letter in hints.absent \
-                    and word.count(letter) != len(hints.correct.get(letter, set())) \
-                                            + len(hints.misplaced.get(letter, set())):
+            if letter in hint.absent \
+                    and word.count(letter) != len(hint.correct.get(letter, set())) \
+                                            + len(hint.misplaced.get(letter, set())):
                 # This letter is absent in the answer, so this is not a
                 # possible guess
                 break
 
-            if hints.inverse_correct.get(index, letter) != letter \
-                    or letter in hints.inverse_misplaced.get(index, set()):
+            if hint.inverse_correct.get(index, letter) != letter \
+                    or letter in hint.inverse_misplaced.get(index, set()):
                 # This letter is not at this index in the answer, so this is
                 # not a possible guess
                 break
         else:
-            for letter in hints.misplaced:
+            for letter in hint.misplaced:
                 if letter not in word:
                     # This letter exists in the answer, so this is not a
                     # possible guess

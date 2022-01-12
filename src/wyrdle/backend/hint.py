@@ -1,10 +1,10 @@
 """A module for administering the information the player receives each round."""
 
-from ..common.hints import Hints
+from ..common.hint import Hint
 
-def hint(answer: str, guess: str) -> Hints:
+def hint(answer: str, guess: str) -> Hint:
     """Hint at the answer based on a guess."""
-    hint = Hints()
+    hint = Hint()
     working_answer = answer[:]
 
     # First, scan for correct letters
