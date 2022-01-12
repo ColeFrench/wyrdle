@@ -14,6 +14,24 @@ _tests = {
     'all absent': (
         ('smile', 'frown', hints.Hints(absent=set('frown'))),
     ),
+    'correct & misplaced': (
+        ('smile', 'slime', hints.Hints(
+            correct={'s': {0}, 'i': {2}, 'e': {4}},
+            misplaced={'l': {1}, 'm': {3}}
+        )),
+    ),
+    'correct & absent': (
+        ('smile', 'guile', hints.Hints(
+            correct={'i': {2}, 'l': {3}, 'e': {4}},
+            absent=set('gu')
+        )),
+    ),
+    'misplaced & absent': (
+        ('smile', 'milky', hints.Hints(
+            misplaced={'m': {0}, 'i': {1}, 'l': {2}},
+            absent=set('ky')
+        )),
+    ),
 }
 
 @pytest.mark.parametrize(
