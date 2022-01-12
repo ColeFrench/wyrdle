@@ -5,13 +5,13 @@ import pytest
 from wyrdle.backend import hints
 
 _tests = {
-    'all letters absent': (
+    'all absent': (
         ('smile', 'frown', hints.Hints(absent=set('frown'))),
     ),
-    'all letters misplaced': (
+    'all misplaced': (
         ('smile', 'limes', hints.Hints(misplaced={v: {k} for k, v in enumerate('limes')})),
     ),
-    'all letters correct': (
+    'all correct': (
         ('smile', 'smile', hints.Hints(correct={v: {k} for k, v in enumerate('smile')})),
     ),
 }
