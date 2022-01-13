@@ -35,22 +35,15 @@ def main():
     guess_pool = guess.filter_guesses(hints[0])
 
     for round in range(ROUNDS):
-        print(f"\n==== ROUND {round} ====")
-
         if round != 0:
             guess_pool &= guess.filter_guesses(hints[-1]) - {guesses[-1]}
 
         sorted_guesses = guess.sort_guesses(guess_pool, guess.score_strings())
-        if sorted_guesses:
-            print(f"Top 5 guesses: {sorted_guesses[:5]}")
-        else:
+        if not sorted_guesses:
             raise KeyError("No possible guesses?!")
 
         guesses.append(sorted_guesses[0])
-        print(f"(Guessing {guesses[-1]})")
-
         hints.append(backend_hint.hint(word, guesses[-1]))
-        print(f"Hint: {hints[-1]}")
 
         if guesses[-1] == word:
             break
