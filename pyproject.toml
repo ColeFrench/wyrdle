@@ -18,6 +18,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
+colorama = "^0.4.4"
 python = "^3.9"
 
 [tool.poetry.dev-dependencies]
