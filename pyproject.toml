@@ -20,6 +20,7 @@ packages = [
 [tool.poetry.dependencies]
 colorama = "^0.4.4"
 python = "^3.9"
+sshkeyboard = "^2.3.1"
 
 [tool.poetry.dev-dependencies]
 pydocstyle = "^6.1.1"
