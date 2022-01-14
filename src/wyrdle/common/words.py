@@ -12985,3 +12985,6 @@ additional_allowed_guesses = frozenset({
     'zymes',
     'zymic',
 })
+
+# All possible guesses, including possible and impossible answers
+allowed_guesses = frozenset(possible_words) | additional_allowed_guesses
