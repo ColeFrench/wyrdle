@@ -3,13 +3,22 @@
 
 This is a Python implementation of the viral word game, [Wordle](https://www.powerlanguage.co.uk/wordle/), by [Josh Wardle](https://www.powerlanguage.co.uk/) (ohh, so that's where the name is from).
 
-Additionally, I've coded a bot that tries to win the game with its own strategy! Can you beat it?
+Additionally, I've coded a bot that tries to win the game with its own strategy! That'll be available in the next update.
 
-## 🛠️ Beta
-I still need to polish some features—especially the user experience, which currently doesn't exist—but the main functionality is complete. Simply clone the repo and run `src/main.py` to watch the bot run on a random word.
+## Installation
+Install from PyPI using
+```sh
+pip install wyrdle
+```
 
-## Example
-For now, you can run the bot on any word by changing [this line](src/main.py#L30). For example, here is the run on `word = 'smile'`:
+## Usage
+You can play today's Wordle right from your terminal! Simply run
+```sh
+wordle
+```
+
+### Example
+Here is a teaser of the bot's run on `word = 'smile'` (and yes: you get a pretty report to share just like in the browser game):
 > Wordle 666 2/6  
 >   
 > 🟩🟨⬛⬛🟩  
