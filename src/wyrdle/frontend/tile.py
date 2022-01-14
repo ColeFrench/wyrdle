@@ -9,7 +9,7 @@ from . import game
 
 _ROWS = 3
 _COLUMNS = 5
-_PADDING = 1
+_PADDING = 0
 
 class Position(Enum):
     """How to position a tile when printing it."""
