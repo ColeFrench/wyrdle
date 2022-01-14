@@ -40,8 +40,10 @@ class Position(Enum):
         if self == cls.EDIT:
             # pylint: disable=invalid-name
             up = Cursor.UP(((_ROWS + _PADDING) * (game.ROUNDS - round_)) - _PADDING - row)
-            forward = Cursor.FORWARD((_COLUMNS + _PADDING) * index)
-            return f'{up}{forward}'
+            # FIXME: Why do we need the extra FORWARD and BACK?
+            forward = Cursor.FORWARD(((_COLUMNS + _PADDING) * index) + 1)
+            back = Cursor.BACK()
+            return f'{up}{forward}{back}'
 
         raise ValueError(f"unhandled position: {self.name}")
 
@@ -88,7 +90,7 @@ class Style(Enum):
             return Fore.BLACK + Back.YELLOW
 
         if self == cls.ABSENT:
-            return Fore.WHITE + Back.BLACK
+            return AnsiStyle.DIM + Fore.WHITE + Back.BLACK
 
         raise ValueError(f"unhandled style: {self.name}")
 
