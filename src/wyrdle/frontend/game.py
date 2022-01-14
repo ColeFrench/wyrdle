@@ -1,6 +1,6 @@
 """Game tracking."""
 
-import random
+from datetime import datetime
 from string import ascii_lowercase
 from time import sleep
 
@@ -17,7 +17,7 @@ ROUNDS = 6
 class Game:
     """Single instance of a game."""
 
-    def __init__(self, answer: str=random.choice(possible_words)):
+    def __init__(self, answer: str=possible_words[(datetime.now() - datetime(2021, 6, 19)).days % len(possible_words)]):
         """Create a new game."""
         self.answer = answer
         # Initiate the first guess
