@@ -4,6 +4,7 @@ import random
 from string import ascii_lowercase
 from time import sleep
 
+from colorama import Style as AnsiStyle
 from sshkeyboard import listen_keyboard, stop_listening
 
 from ..backend.hint import hint
@@ -29,6 +30,10 @@ class Game:
         """Play the game from start to finish."""
         self._initialize_board()
         listen_keyboard(on_press=self._handle_keypress, sequential=True, delay_second_char=0.05)
+        print()
+        self._summarize()
+        print()
+        self._generate_report()
 
     def _initialize_board(self):
         """Print the initial, empty board."""
@@ -86,3 +91,24 @@ class Game:
                 else:
                     # Initiate the next guess
                     self.guesses.append('')
+
+    def _summarize(self):
+        if self.guesses[-1] == self.answer:
+            print(f"{AnsiStyle.BRIGHT}Victory! 🏆{AnsiStyle.RESET_ALL}")
+        else:
+            print(f"{AnsiStyle.DIM}Defeat 😣{AnsiStyle.RESET_ALL} The word was {AnsiStyle.BRIGHT}{self.answer}{AnsiStyle.RESET_ALL}.")
+
+    def _generate_report(self):
+        """Print the same report as Wordle."""
+        print(f"Wordle {possible_words.index(self.answer)} {self.round if self.guesses[-1] == self.answer else 'X'}/{ROUNDS}\n")
+        for round_ in range(self.round):
+            hint_ = self.hints[round_]
+            tiles = ["⬛"] * LENGTH
+
+            for correct_index in hint_.inverse_correct:
+                tiles[correct_index] = "🟩"
+
+            for misplaced_index in hint_.inverse_misplaced:
+                tiles[misplaced_index] = "🟨"
+
+            print("".join(tiles))
