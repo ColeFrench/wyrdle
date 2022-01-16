@@ -21,3 +21,10 @@ class Player(metaclass=ABCMeta):
 
         :param index: the index of the letter to propose
         """
+
+    @abstractmethod
+    def stop_guess(self, round_: int) -> None:
+        """Conclude the current guess; it has been submitted.
+
+        :param round_: the round that finished
+        """
