@@ -8,6 +8,9 @@ from .game import Game
 class _ArgumentParser(Tap):
     bot: bool = False  # have the bot play instead
 
+    def configure(self):
+        self.add_argument('-b', '--bot')
+
 def cli():
     """Command-line interface."""
     args = _ArgumentParser(description="Interact with Wordle.").parse_args()
