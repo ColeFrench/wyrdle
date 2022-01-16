@@ -1,15 +1,16 @@
 """User interface."""
 
-import argparse
-
 import colorama
+from tap import Tap
 
 from .game import Game
 
+class _ArgumentParser(Tap):
+    pass
+
 def cli():
     """Command-line interface."""
-    parser = argparse.ArgumentParser(description="Interact with Wordle.")
-    parser.parse_args()
+    _ArgumentParser(description="Interact with Wordle.").parse_args()
 
     colorama.init()
     Game().play()
