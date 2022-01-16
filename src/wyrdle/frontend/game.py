@@ -39,7 +39,7 @@ class Game:
             self.player.start_guess(self.round, hint_)
 
             while self.round != next_round:
-                self._handle_keypress(self.player.propose_letter(self.index))
+                self._handle_keypress(self.player.output_key(self.index))
 
             self.player.stop_guess(self.round - 1)
 

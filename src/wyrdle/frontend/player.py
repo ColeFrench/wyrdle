@@ -21,10 +21,13 @@ class Player(metaclass=ABCMeta):
         """
 
     @abstractmethod
-    def propose_letter(self, index: int) -> str:
-        """Propose the next letter of the current guess.
+    def output_key(self, index: int) -> str:
+        """Output a key for the current guess.
 
-        :param index: the index of the letter to propose
+        If it's
+        - a letter, then it'll be appended to the guess at the given index.
+        - a backspace, then the last letter guessed will be deleted.
+        - an enter, then the current guess will be submitted.
         """
 
     @abstractmethod
@@ -45,7 +48,7 @@ class User(Player):
         if round_ == 0:
             self._start_listening()
 
-    def propose_letter(self, index: int) -> str:
+    def output_key(self, index: int) -> str:
         return self._queue.get()
 
     def stop_guess(self, round_: int) -> None:
