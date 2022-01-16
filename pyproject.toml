@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "wyrdle"
-version = "1.1.1"
+version = "1.1.2"
 description = "Wordle and bot in Python"
 license = "MIT"
 authors = [
