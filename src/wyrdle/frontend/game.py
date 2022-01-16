@@ -5,11 +5,12 @@ from string import ascii_lowercase
 from time import sleep
 
 from colorama import Style as AnsiStyle
-from sshkeyboard import listen_keyboard, stop_listening
 
 from ..backend.hint import hint
+from ..common.hint import Hint
 from ..common.words import LENGTH, allowed_guesses, possible_words
 from ..frontend.tile import Position, Style, Tile
+from .player import User
 
 # The number of rounds in a game
 ROUNDS = 6
@@ -20,8 +21,8 @@ class Game:
     def __init__(self, answer: str=possible_words[(datetime.now() - datetime(2021, 6, 19)).days % len(possible_words)]):
         """Create a new game."""
         self.answer = answer
-        # Initiate the first guess
-        self.guesses = ['']
+        self.player = User()
+        self.guesses = []
         self.hints = []
         self.round = 0
         self.index = 0
@@ -29,7 +30,19 @@ class Game:
     def play(self):
         """Play the game from start to finish."""
         self._initialize_board()
-        listen_keyboard(on_press=self._handle_keypress, sequential=True, delay_second_char=0.05)
+
+        while self.round != ROUNDS and (not self.guesses or self.guesses[-1] != self.answer):
+            self.guesses.append('')
+            hint_ = Hint() if self.round == 0 else self.hints[-1]
+            next_round = self.round + 1
+
+            self.player.start_guess(self.round, hint_)
+
+            while self.round != next_round:
+                self._handle_keypress(self.player.propose_letter(self.index))
+
+            self.player.stop_guess(self.round - 1)
+
         print()
         self._summarize()
         print()
@@ -45,7 +58,7 @@ class Game:
         print(end="", flush=True)
 
     def _handle_keypress(self, key: str):
-        """Handle the user's input to the game board."""
+        """Handle the player's input to the game board."""
         if key in ascii_lowercase:
             if self.index < LENGTH:
                 # Add the letter to our guess
@@ -84,13 +97,6 @@ class Game:
 
                 self.round += 1
                 self.index = 0
-
-                if self.round == ROUNDS or guess == self.answer:
-                    # Game over
-                    stop_listening()
-                else:
-                    # Initiate the next guess
-                    self.guesses.append('')
 
     def _summarize(self):
         if self.guesses[-1] == self.answer:
