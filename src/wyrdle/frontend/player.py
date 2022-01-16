@@ -3,11 +3,14 @@
 from abc import ABCMeta, abstractmethod
 from queue import Queue
 from threading import Thread
+from time import sleep
 
 from sshkeyboard import listen_keyboard, stop_listening
 
 from ..common.hint import Hint
+from ..common.words import LENGTH
 from . import game
+from .guess import filter_guesses, score_strings, sort_guesses
 
 class Player(metaclass=ABCMeta):
     """A player of the game."""
@@ -74,3 +77,24 @@ class User(Player):
     def _handle_keypress(self, key: str) -> None:
         """Handle the user's input."""
         self._queue.put(key)
+
+class Bot(Player):
+    """A bot: No I/O is required; it guesses on its own."""
+
+    def __init__(self):
+        self._guess: str = None
+
+    def start_guess(self, round_: int, hint: Hint) -> None:
+        guesses = filter_guesses(hint)
+        sorted_guesses = sort_guesses(guesses, score_strings())
+        self._guess = sorted_guesses[0]
+        # Pause for effect
+        sleep(1)
+
+    def output_key(self, index: int) -> str:
+        # Pause for effect
+        sleep(0.25)
+        return 'enter' if index == LENGTH else self._guess[index]
+
+    def stop_guess(self, round_: int) -> None:
+        pass

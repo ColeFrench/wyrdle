@@ -10,7 +10,7 @@ from ..backend.hint import hint
 from ..common.hint import Hint
 from ..common.words import LENGTH, allowed_guesses, possible_words
 from ..frontend.tile import Position, Style, Tile
-from .player import User
+from .player import Bot, User
 
 # The number of rounds in a game
 ROUNDS = 6
@@ -18,10 +18,10 @@ ROUNDS = 6
 class Game:
     """Single instance of a game."""
 
-    def __init__(self, answer: str=possible_words[(datetime.now() - datetime(2021, 6, 19)).days % len(possible_words)]):
+    def __init__(self, answer: str=possible_words[(datetime.now() - datetime(2021, 6, 19)).days % len(possible_words)], bot=False):
         """Create a new game."""
         self.answer = answer
-        self.player = User()
+        self.player = Bot() if bot else User()
         self.guesses = []
         self.hints = []
         self.round = 0
