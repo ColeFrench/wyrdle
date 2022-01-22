@@ -3,6 +3,7 @@
 from datetime import datetime
 from string import ascii_lowercase
 from time import sleep
+from typing import Literal, Union
 
 from colorama import Style as AnsiStyle
 
@@ -18,8 +19,14 @@ ROUNDS = 6
 class Game:
     """Single instance of a game."""
 
-    def __init__(self, answer: str=possible_words[(datetime.now() - datetime(2021, 6, 19)).days % len(possible_words)], bot=False):
+    def __init__(self, answer: str='today\'s', day: Union[Literal['today'], int]='today', bot=False):
         """Create a new game."""
+        if answer == 'today\'s':
+            if day == 'today':
+                day = (datetime.now() - datetime(2021, 6, 19)).days
+
+            answer = possible_words[day % len(possible_words)]
+
         self.answer = answer
         self.player = Bot() if bot else User()
         self.guesses = []
