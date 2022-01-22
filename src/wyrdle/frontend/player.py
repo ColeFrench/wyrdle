@@ -82,19 +82,22 @@ class Bot(Player):
     """A bot: No I/O is required; it guesses on its own."""
 
     def __init__(self):
-        self._guesses: list[str] = []
+        self._possible_guesses: set[str] = filter_guesses(Hint())
+        self._guess: str = None
 
     def start_guess(self, round_: int, hint: Hint) -> None:
-        guesses = filter_guesses(hint).difference(self._guesses)
-        sorted_guesses = sort_guesses(guesses, score_strings())
-        self._guesses.append(sorted_guesses[0])
+        self._possible_guesses &= filter_guesses(hint)
+        sorted_guesses = sort_guesses(self._possible_guesses, score_strings())
+
+        self._guess = sorted_guesses[0]
+        self._possible_guesses.remove(self._guess)
         # Pause for effect
         sleep(1)
 
     def output_key(self, index: int) -> str:
         # Pause for effect
         sleep(0.25)
-        return 'enter' if index == LENGTH else self._guesses[-1][index]
+        return 'enter' if index == LENGTH else self._guess[index]
 
     def stop_guess(self, round_: int) -> None:
         pass
